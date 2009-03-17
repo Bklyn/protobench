@@ -10,16 +10,13 @@
 #include "google_speed.pb.h"
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <cerrno>
 #include <ctime>
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
-
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 static const double MIN_SAMPLE_TIME = 1.0;
 static const double TARGET_TIME     = 5.0;
@@ -85,23 +82,13 @@ runTest (const char* type, const char* filename)
         return false;
     }
 
-    int fd = open (filename, O_RDONLY);
-
-    if (fd < 0) {
-        cerr << "Failed to open " << filename << " for reading: "
-             << strerror (errno) << endl;
-        return false;
-    }
-
-    FileInputStream istr (fd);
+    ifstream input (filename);
+    IstreamInputStream istr (&input);
 
     if (!msg->ParseFromZeroCopyStream (&istr)) {
-        close (fd);
         cerr << "Failed to parse " << type << " from " << filename << endl;
         return false;
     }
-
-    close (fd);
 
     std::string wire_form = msg->SerializeAsString ();
 

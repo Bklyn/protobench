@@ -14,7 +14,7 @@ ProtoBench: $(OBJ)
 	$(LINK.cc) -o $@ $(OBJ) $(LDLIBS)
 
 clean:
-	$(RM) $(RMFLAGS) $(OBJ) $(PROTOSRC) $(PROTOH)
+	$(RM) $(RMFLAGS) ProtoBench $(OBJ) $(PROTOSRC) $(PROTOH)
 
 %.pb.cc %.pb.h: %.proto
 	protoc --cpp_out=. $<
