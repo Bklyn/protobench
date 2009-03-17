@@ -1,0 +1,7 @@
+ProtoBench
+*~
+*.o
+*.pb.cc
+*.pb.h
+core
+core.*

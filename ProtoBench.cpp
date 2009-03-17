@@ -12,8 +12,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cerrno>
-#include <ctime>
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
